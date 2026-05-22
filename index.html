@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>授業進捗タイマー</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <div class="card clock-card">
+      <div id="clock" class="clock">00:00:00</div>
+      <div id="status" class="status">読み込み中...</div>
+    </div>
+
+    <div class="card progress-card">
+      <div class="progress-meta">
+        <span id="bar-label" class="bar-label">進捗</span>
+        <span id="bar-pct" class="bar-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="card stat-card">
+        <div class="stat-label">経過</div>
+        <div id="elapsed" class="stat-value">—</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-label">残り</div>
+        <div id="remaining" class="stat-value">—</div>
+      </div>
+    </div>
+
+    <div class="card schedule-card">
+      <div class="schedule-title">本日のスケジュール</div>
+      <div id="schedule-list" class="schedule-list"></div>
+    </div>
+
+  </div>
+  <script src="timer.js"></script>
+</body>
+</html>

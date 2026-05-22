@@ -1,0 +1,223 @@
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-app:       #1a1a2e;
+  --bg-card:      #16213e;
+  --bg-card-alt:  #0f3460;
+  --bg-stat:      #1e2a45;
+
+  --blue:         #1f6aa5;
+  --blue-light:   #378ADD;
+  --green:        #2cc985;
+  --green-dark:   #1D9E75;
+  --gray:         #6b7280;
+  --gray-muted:   #374151;
+
+  --text-primary:   #f0f0f0;
+  --text-secondary: #9ca3af;
+  --text-green:     #2cc985;
+
+  --radius-card: 12px;
+  --radius-md:   8px;
+  --radius-sm:   6px;
+  --radius-pill: 999px;
+
+  --font-mono: 'Courier New', 'Menlo', 'Consolas', monospace;
+  --font-sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.app {
+  min-height: 100vh;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 20px;
+}
+
+/* ── Clock Card ── */
+.clock-card {
+  text-align: center;
+  padding: 28px 20px 24px;
+  background: var(--bg-card);
+}
+
+.clock {
+  font-family: var(--font-mono);
+  font-size: clamp(44px, 12vw, 64px);
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 14px;
+  /* subtle glow to match the "bright digital display" feel */
+  text-shadow: 0 0 24px rgba(255,255,255,0.12);
+}
+
+.status {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text-primary);
+  transition: color 0.4s ease;
+}
+
+.status.is-break   { color: var(--green); }
+.status.is-after   { color: var(--gray); }
+.status.is-before  { color: var(--gray); }
+
+/* ── Progress Card ── */
+.progress-card {
+  padding: 16px 20px;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.bar-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.bar-pct {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+.progress-track {
+  height: 10px;
+  background: var(--bg-stat);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-pill);
+  background: var(--blue-light);
+  transition: width 0.9s ease, background-color 0.4s ease;
+}
+
+.progress-bar.is-break   { background: var(--green); }
+.progress-bar.is-done    { background: var(--gray); }
+
+/* ── Stats Row ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--bg-stat);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight: bold;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Schedule Card ── */
+.schedule-card {
+  padding: 18px 20px;
+}
+
+.schedule-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: background 0.3s ease;
+}
+
+.schedule-row.is-active {
+  background: rgba(55, 138, 221, 0.15);
+}
+
+.schedule-period {
+  min-width: 26px;
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+
+.schedule-time {
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.schedule-tag {
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  font-weight: bold;
+}
+
+.tag-active {
+  background: var(--blue-light);
+  color: #fff;
+}
+
+.tag-next {
+  background: rgba(44, 201, 133, 0.18);
+  color: var(--green);
+}
+
+.tag-done {
+  background: var(--gray-muted);
+  color: var(--text-secondary);
+}
