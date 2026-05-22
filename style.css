@@ -6,17 +6,17 @@
 }
 
 :root {
-  --bg-app:       #1a1a2e;
-  --bg-card:      #16213e;
-  --bg-card-alt:  #0f3460;
-  --bg-stat:      #1e2a45;
+  --bg-app:       #242424;
+  --bg-card:      #2e2e2e;
+  --bg-card-alt:  #363636;
+  --bg-stat:      #333333;
 
   --blue:         #1f6aa5;
-  --blue-light:   #378ADD;
+  --blue-light:   #1f6aa5;
   --green:        #2cc985;
   --green-dark:   #1D9E75;
   --gray:         #6b7280;
-  --gray-muted:   #374151;
+  --gray-muted:   #444444;
 
   --text-primary:   #f0f0f0;
   --text-secondary: #9ca3af;
@@ -37,13 +37,15 @@ html, body {
   color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ── Layout ── */
 .app {
-  min-height: 100vh;
+  width: 100%;
   max-width: 440px;
-  margin: 0 auto;
   padding: 20px 16px 32px;
   display: flex;
   flex-direction: column;
@@ -121,7 +123,7 @@ html, body {
   height: 100%;
   width: 0%;
   border-radius: var(--radius-pill);
-  background: var(--blue-light);
+  background: var(--blue);
   transition: width 0.9s ease, background-color 0.4s ease;
 }
 
@@ -208,7 +210,7 @@ html, body {
 }
 
 .tag-active {
-  background: var(--blue-light);
+  background: var(--blue);
   color: #fff;
 }
 
