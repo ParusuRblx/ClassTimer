@@ -60,7 +60,7 @@ html, body {
 /* ── Clock Card ── */
 .clock-card {
   text-align: center;
-  padding: 28px 20px 24px;
+  padding: 28px 50px 24px;
   background: var(--bg-card);
 }
 
