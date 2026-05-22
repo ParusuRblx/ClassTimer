@@ -26,16 +26,14 @@
   --radius-md:   8px;
   --radius-sm:   6px;
   --radius-pill: 999px;
-
-  --font-mono: 'Courier New', 'Menlo', 'Consolas', monospace;
-  --font-sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --font: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
 html, body {
   height: 100%;
   background-color: var(--bg-app);
   color: var(--text-primary);
-  font-family: var(--font-sans);
+  font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   display: flex;
   justify-content: center;
@@ -67,7 +65,7 @@ html, body {
 }
 
 .clock {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: clamp(44px, 12vw, 64px);
   font-weight: bold;
   letter-spacing: 0.04em;
