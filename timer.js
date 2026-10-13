@@ -18,6 +18,34 @@ const elElapsed   = document.getElementById('elapsed');
 const elRemaining = document.getElementById('remaining');
 const elList      = document.getElementById('schedule-list');
 
+// ── デバッグ用時刻の初期化 ──
+let debugBaseSeconds = null; // デバッグ開始時点の秒数
+let debugRealTime = null;   // デバッグモードが開始された実時間（Date.now()）
+
+function initDebugTime() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const tParam = urlParams.get('t');
+  if (tParam) {
+    const parts = tParam.split(':').map(Number);
+    const h = parts[0] || 0;
+    const m = parts[1] || 0;
+    const s = parts[2] || 0;
+    debugBaseSeconds = h * 3600 + m * 60 + s;
+    debugRealTime = Date.now();
+  }
+}
+
+// 現在のシミュレーション上の秒数を取得
+function getCurrentSeconds() {
+  if (debugBaseSeconds !== null) {
+    // デバッグ開始からの経過秒数を足すことで、時間が進むようにする
+    const elapsedRealSec = Math.floor((Date.now() - debugRealTime) / 1000);
+    return debugBaseSeconds + elapsedRealSec;
+  }
+  const now = new Date();
+  return now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+}
+
 // ── Helpers ──
 function toSec(h, m) { return h * 3600 + m * 60; }
 
@@ -81,15 +109,16 @@ function updateScheduleRows(cur, activePeriod, nextPeriod) {
 
 // ── メイン更新ループ ──
 function update() {
-  const now = new Date();
-  const hh = pad2(now.getHours());
-  const mm = pad2(now.getMinutes());
-  const ss = pad2(now.getSeconds());
+  const cur = getCurrentSeconds();
+
+  // 時計表示用の時・分・秒を計算
+  const hh = pad2(Math.floor(cur / 3600) % 24);
+  const mm = pad2(Math.floor((cur % 3600) / 60));
+  const ss = pad2(cur % 60);
+  
   elClock.textContent = `${hh}:${mm}:${ss}`;
 
-  const cur = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-
-  // 現在授業中 or 次の授業を特定（Pythonロジックをそのまま移植）
+  // 現在授業中 or 次の授業を特定
   let activePeriod = null;
   let nextPeriod   = null;
 
@@ -180,6 +209,7 @@ function update() {
 }
 
 // ── 初期化 ──
+initDebugTime();
 buildSchedule();
 update();
 setInterval(update, 1000);
